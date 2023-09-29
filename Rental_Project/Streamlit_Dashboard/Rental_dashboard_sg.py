@@ -259,7 +259,7 @@ st.plotly_chart(fig_map, use_container_width=True)
     #"Distance_to_Nearest_MRT_km": [mean_distance_to_nearest_mrt],
     #"Walking_Time_to_Nearest_MRT_min": [mean_walking_time_to_nearest_mrt]
     # Add other features as needed
-})
+#})
 
 # Scale numerical features using the loaded scaler
 #numerical_features = ["latitude", "longitude", "latitude_mrt", "longitude_mrt",
