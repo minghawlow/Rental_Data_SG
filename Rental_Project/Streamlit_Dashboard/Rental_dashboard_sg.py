@@ -6,46 +6,46 @@ from google.cloud import storage
 from st_files_connection import FilesConnection
 
 # Initialize Google Cloud Storage client
-client = storage.Client()
+# client = storage.Client()
 
 # Define the GCS bucket name
-bucket_name = "rental_data_sg"
+# bucket_name = "rental_data_sg"
 
 # Define the folder path in the bucket where the files are located
-folder_path = "streamlit_dashboard_pkl"
+# folder_path = "streamlit_dashboard_pkl"
 
 # Define the file names within the folder
-file_names = [
-    "rf_model.pkl",
-    "scaler.pkl",
-    "ordinal_encoder.pkl",
-    "one_hot_encoder.pkl"
+# file_names = [
+  #  "rf_model.pkl",
+   # "scaler.pkl",
+    #"ordinal_encoder.pkl",
+    #"one_hot_encoder.pkl"
 ]
 
 # Download the files from GCS and load them
-downloaded_files = {}
-with st.spinner("Downloading files..."):
-    for file_name in file_names:
+# downloaded_files = {}
+# with st.spinner("Downloading files..."):
+    # for file_name in file_names:
         # Specify the destination file name for each downloaded file
-        destination_file = f"downloaded_{file_name}"
+        # destination_file = f"downloaded_{file_name}"
         
         # Construct the full file path within the folder
-        full_file_path = f"{folder_path}/{file_name}"
+        # full_file_path = f"{folder_path}/{file_name}"
         
         # Download the file from GCS
-        bucket = client.get_bucket(bucket_name)
-        blob = bucket.blob(full_file_path)
-        blob.download_to_filename(destination_file)
+        # bucket = client.get_bucket(bucket_name)
+        # blob = bucket.blob(full_file_path)
+        # blob.download_to_filename(destination_file)
         
         # Load the downloaded file using joblib and store it in a dictionary
-        loaded_file = joblib.load(destination_file)
-        downloaded_files[file_name] = loaded_file
+        # loaded_file = joblib.load(destination_file)
+        # downloaded_files[file_name] = loaded_file
 
 # Unpack the downloaded files into separate variables
-model = downloaded_files["rf_model.pkl"]
-scaler = downloaded_files["scaler.pkl"]
-ordinal_encoder = downloaded_files["ordinal_encoder.pkl"]
-one_hot_encoder = downloaded_files["one_hot_encoder.pkl"]
+# model = downloaded_files["rf_model.pkl"]
+# scaler = downloaded_files["scaler.pkl"]
+# ordinal_encoder = downloaded_files["ordinal_encoder.pkl"]
+# one_hot_encoder = downloaded_files["one_hot_encoder.pkl"]
 
 # Set the Streamlit app width to the maximum available width
 st.set_page_config(
@@ -208,82 +208,82 @@ fig_map.update_traces(
 st.plotly_chart(fig_map, use_container_width=True)
 
 # Predictive model
-st.header("Rental Price Prediction")
+# st.header("Rental Price Prediction")
 
-cola, colb, colc, cold = st.columns(4)
-with cola:
+# cola, colb, colc, cold = st.columns(4)
+# with cola:
    # Select Region
-    selected_region = st.selectbox("Select Region", df["region"].unique())
+    #selected_region = st.selectbox("Select Region", df["region"].unique())
 
-with colb:
+#with colb:
    # Filter planning areas based on the selected region
-    planning_areas_in_selected_region = df[df["region"] == selected_region]["planning_area"].unique()
+    #planning_areas_in_selected_region = df[df["region"] == selected_region]["planning_area"].unique()
    #Select Planning Area
-    selected_planning_area = st.selectbox("Select Planning Area", planning_areas_in_selected_region)
+    #selected_planning_area = st.selectbox("Select Planning Area", planning_areas_in_selected_region)
 
-with colc:
+#with colc:
    # Select Unit Type
-    selected_unit_type = st.selectbox("Select Unit Type", df["unit_type"].unique())
+    #selected_unit_type = st.selectbox("Select Unit Type", df["unit_type"].unique())
 
-with cold:
+#with cold:
    # Select Room Type
-    selected_room_type = st.selectbox("Select Room Type", df["room_type"].unique())
+    #selected_room_type = st.selectbox("Select Room Type", df["room_type"].unique())
 
 # Assuming you have already selected region, planning_area, unit_type, and room_type
-selected_properties = df[(df["region"] == selected_region) & (df["planning_area"] == selected_planning_area)]
+#selected_properties = df[(df["region"] == selected_region) & (df["planning_area"] == selected_planning_area)]
 
 # Calculate statistics for remaining features based on selected properties
-mean_latitude = selected_properties["latitude"].mean()
-mean_longitude = selected_properties["longitude"].mean()
-mean_latitude_mrt = selected_properties["latitude_mrt"].mean()
-mean_longitude_mrt = selected_properties["longitude_mrt"].mean()
+#mean_latitude = selected_properties["latitude"].mean()
+#mean_longitude = selected_properties["longitude"].mean()
+#mean_latitude_mrt = selected_properties["latitude_mrt"].mean()
+#mean_longitude_mrt = selected_properties["longitude_mrt"].mean()
 
 # Handle missing values by using default values or other strategies
-mean_room_size_sqft = selected_properties[selected_properties["room_type"] == selected_room_type]["room_size_sqft"].median()
-mode_nearest_mrt_station = selected_properties["Nearest_MRT_Station"].mode().iloc[0]
-mean_distance_to_nearest_mrt = selected_properties["Distance_to_Nearest_MRT_km"].mean()
-mean_walking_time_to_nearest_mrt = selected_properties["Walking_Time_to_Nearest_MRT_min"].mean()
+#mean_room_size_sqft = selected_properties[selected_properties["room_type"] == selected_room_type]["room_size_sqft"].median()
+#mode_nearest_mrt_station = selected_properties["Nearest_MRT_Station"].mode().iloc[0]
+#mean_distance_to_nearest_mrt = selected_properties["Distance_to_Nearest_MRT_km"].mean()
+#mean_walking_time_to_nearest_mrt = selected_properties["Walking_Time_to_Nearest_MRT_min"].mean()
 
 # Create input data with default values
-input_data = pd.DataFrame({
-    "region": [selected_region],
-    "planning_area": [selected_planning_area],
-    "unit_type": [selected_unit_type],
-    "room_type": [selected_room_type],
-    "latitude": [mean_latitude],
-    "longitude": [mean_longitude],
-    "latitude_mrt": [mean_latitude_mrt],
-    "longitude_mrt": [mean_longitude_mrt],
-    "room_size_sqft": [mean_room_size_sqft],
-    "Nearest_MRT_Station": [mode_nearest_mrt_station],
-    "Distance_to_Nearest_MRT_km": [mean_distance_to_nearest_mrt],
-    "Walking_Time_to_Nearest_MRT_min": [mean_walking_time_to_nearest_mrt]
+# input_data = pd.DataFrame({
+    #"region": [selected_region],
+    #"planning_area": [selected_planning_area],
+    #"unit_type": [selected_unit_type],
+    #"room_type": [selected_room_type],
+    #"latitude": [mean_latitude],
+    #"longitude": [mean_longitude],
+    #"latitude_mrt": [mean_latitude_mrt],
+    #"longitude_mrt": [mean_longitude_mrt],
+    #"room_size_sqft": [mean_room_size_sqft],
+    #"Nearest_MRT_Station": [mode_nearest_mrt_station],
+    #"Distance_to_Nearest_MRT_km": [mean_distance_to_nearest_mrt],
+    #"Walking_Time_to_Nearest_MRT_min": [mean_walking_time_to_nearest_mrt]
     # Add other features as needed
 })
 
 # Scale numerical features using the loaded scaler
-numerical_features = ["latitude", "longitude", "latitude_mrt", "longitude_mrt",
-                      "Distance_to_Nearest_MRT_km", "Walking_Time_to_Nearest_MRT_min",
-                      "room_size_sqft"]
-input_data[numerical_features] = scaler.transform(input_data[numerical_features])
+#numerical_features = ["latitude", "longitude", "latitude_mrt", "longitude_mrt",
+                   #   "Distance_to_Nearest_MRT_km", "Walking_Time_to_Nearest_MRT_min",
+                    #  "room_size_sqft"]
+#input_data[numerical_features] = scaler.transform(input_data[numerical_features])
 
-one_hot_cols = ["region", "unit_type", "room_type"]
-ordinal_cols = ["planning_area", "Nearest_MRT_Station"]
+#one_hot_cols = ["region", "unit_type", "room_type"]
+#ordinal_cols = ["planning_area", "Nearest_MRT_Station"]
     
 # Apply ordinal encoding to the specified columns
-input_data[ordinal_cols] = ordinal_encoder.transform(input_data[ordinal_cols])
+#input_data[ordinal_cols] = ordinal_encoder.transform(input_data[ordinal_cols])
 
 # Apply one-hot encoding to the specified columns
-one_hot_encoded = one_hot_encoder.transform(input_data[one_hot_cols])
-one_hot_encoded_df = pd.DataFrame(one_hot_encoded, columns=one_hot_encoder.get_feature_names_out(one_hot_cols))
+#one_hot_encoded = one_hot_encoder.transform(input_data[one_hot_cols])
+#one_hot_encoded_df = pd.DataFrame(one_hot_encoded, columns=one_hot_encoder.get_feature_names_out(one_hot_cols))
 
 # Concatenate the one-hot encoded dataframe with the original dataframe
-input_data = pd.concat([input_data, one_hot_encoded_df], axis=1)
+#input_data = pd.concat([input_data, one_hot_encoded_df], axis=1)
 
 # Drop the original categorical columns
-input_data.drop(one_hot_cols, axis=1, inplace=True)
+#input_data.drop(one_hot_cols, axis=1, inplace=True)
 
-if st.button("Predict"):
+#if st.button("Predict"):
     # Make predictions using the loaded model
-    prediction = model.predict(input_data)
-    st.write(f"Predicted Price: ${prediction[0]:.2f}")
+   # prediction = model.predict(input_data)
+   # st.write(f"Predicted Price: ${prediction[0]:.2f}")
