@@ -1,5 +1,0 @@
-google-cloud-storage
-streamlit
-pandas
-plotly
-joblib
