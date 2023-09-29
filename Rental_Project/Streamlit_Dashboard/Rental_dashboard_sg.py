@@ -20,7 +20,7 @@ from st_files_connection import FilesConnection
    # "scaler.pkl",
     #"ordinal_encoder.pkl",
     #"one_hot_encoder.pkl"
-]
+#]
 
 # Download the files from GCS and load them
 # downloaded_files = {}
