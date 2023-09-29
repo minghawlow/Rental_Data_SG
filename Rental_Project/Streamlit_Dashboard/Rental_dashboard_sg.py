@@ -2,6 +2,49 @@ import joblib
 import streamlit as st
 import pandas as pd
 import plotly.express as px
+from google.cloud import storage
+
+# Initialize Google Cloud Storage client
+client = storage.Client()
+
+# Define the GCS bucket name
+bucket_name = "rental_data_sg"
+
+# Define the folder path in the bucket where the files are located
+folder_path = "streamlit_dashboard_pkl"
+
+# Define the file names within the folder
+file_names = [
+    "rf_model.pkl",
+    "scaler.pkl",
+    "ordinal_encoder.pkl",
+    "one_hot_encoder.pkl"
+]
+
+# Download the files from GCS and load them
+downloaded_files = {}
+with st.spinner("Downloading files..."):
+    for file_name in file_names:
+        # Specify the destination file name for each downloaded file
+        destination_file = f"downloaded_{file_name}"
+        
+        # Construct the full file path within the folder
+        full_file_path = f"{folder_path}/{file_name}"
+        
+        # Download the file from GCS
+        bucket = client.get_bucket(bucket_name)
+        blob = bucket.blob(full_file_path)
+        blob.download_to_filename(destination_file)
+        
+        # Load the downloaded file using joblib and store it in a dictionary
+        loaded_file = joblib.load(destination_file)
+        downloaded_files[file_name] = loaded_file
+
+# Unpack the downloaded files into separate variables
+model = downloaded_files["rf_model.pkl"]
+scaler = downloaded_files["scaler.pkl"]
+ordinal_encoder = downloaded_files["ordinal_encoder.pkl"]
+one_hot_encoder = downloaded_files["one_hot_encoder.pkl"]
 
 # Set the Streamlit app width to the maximum available width
 st.set_page_config(
@@ -15,7 +58,7 @@ st.title("Singapore Rental Property Dashboard")
 # Load data and cache it
 @st.cache_data
 def load_data():
-    return pd.read_csv('/Users/jameslow/Downloads/Rental_data_final.csv')
+    return pd.read_csv('Rental_data_final.csv')
 
 df = load_data()
 
@@ -165,15 +208,6 @@ st.plotly_chart(fig_map, use_container_width=True)
 
 # Predictive model
 st.header("Rental Price Prediction")
-# Load the trained machine learning model
-model = joblib.load("/Users/jameslow/Downloads/rf_model.pkl")
-
-# Load the scaler for numerical features
-scaler = joblib.load("/Users/jameslow/Downloads/scaler.pkl")
-
-# Load the saved OrdinalEncoder and OneHotEncoder
-ordinal_encoder = joblib.load("/Users/jameslow/Downloads/ordinal_encoder.pkl")
-one_hot_encoder = joblib.load("/Users/jameslow/Downloads/one_hot_encoder.pkl")
 
 cola, colb, colc, cold = st.columns(4)
 with cola:
