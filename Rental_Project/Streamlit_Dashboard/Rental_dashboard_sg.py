@@ -3,6 +3,7 @@ import streamlit as st
 import pandas as pd
 import plotly.express as px
 from google.cloud import storage
+from st_files_connection import FilesConnection
 
 # Initialize Google Cloud Storage client
 client = storage.Client()
