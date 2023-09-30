@@ -19,7 +19,7 @@ modeltraining = st.container()
 
 with header:
     st.title("Singapore Rental Property Dashboard")
-    st.markdown("*Updated on 30/9/2023*"    
+    st.markdown("*Updated on 30/9/2023*")
 
     # Load data and cache it
     @st.cache_data
