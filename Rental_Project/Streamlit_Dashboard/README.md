@@ -3,6 +3,7 @@
 ## Overview
 
 The Singapore Rental Unit Dashboard is a web application designed to simplify the process of finding suitable rental units in Singapore. Whether you're a newcomer or a resident looking for a rental property, this dashboard provides a user-friendly interface to explore rental listings, visualize rental data, and even make rental predictions.
+Here is the link [Streamlit Dashboard](https://l.messenger.com/l.php?u=https%3A%2F%2Fsingapore-rental-dashboard.streamlit.app%2F&h=AT0ZW69zAMaTqDMwCnLS_wchMbDUp2PFRL44EZVsoSzZGNfTtLBC3dOOOnPoXB7i-2tnGT4zivGExF3nN75U_mBsXvtSUI3JGjJIAFOTopyjTXc-nixGrIh_gp7U9-7Kl9RDYZph9pxpfuL-EOAqE0G_-iI)
 
 ## Features
 
