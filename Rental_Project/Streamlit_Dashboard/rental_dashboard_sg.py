@@ -325,10 +325,6 @@ with modeltraining:
     input_data.drop(one_hot_cols, axis=1, inplace=True)
 
     if st.button("Predict"):
-        try:
             # Make predictions using the loaded model
             prediction = rf.predict(input_data)
             st.success(f"Predicted Price: ${prediction[0]:.2f}")
-        except ValueError as e:
-            # Handle the ValueError (NaN or infinity) with a warning message
-            st.warning("Sorry, there is no historical data for such unit.")
