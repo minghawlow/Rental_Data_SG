@@ -23,7 +23,7 @@ with header:
     # Load data and cache it
     @st.cache_data
     def load_data():
-        return pd.read_csv('Rental_data_final.csv')
+        return pd.read_csv('Rental_Project/Streamlit_Dashboard/Rental_data_final.csv')
 
     df = load_data()
 
