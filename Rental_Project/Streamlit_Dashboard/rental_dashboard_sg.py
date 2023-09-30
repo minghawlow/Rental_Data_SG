@@ -225,7 +225,7 @@ with modeltraining:
     
     X_train, X_test, y_train, y_test = split_data(data)
 
-    @st.cache_data
+    @st.cache_resource
     def train_random_forest(X_train, y_train):
         rf = RandomForestRegressor(
             max_depth=36,
