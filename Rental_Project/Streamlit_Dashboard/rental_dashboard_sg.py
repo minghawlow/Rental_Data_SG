@@ -94,7 +94,7 @@ with chart:
                         hoverlabel=dict(font=dict(size=14)))
         fig.update_xaxes(title_text="Price (SGD)", showgrid=False)
         fig.update_yaxes(title_text="Number of Listings", showgrid=False)
-        st.plotly_chart(fig)
+        st.plotly_chart(fig, use_container_width=True)
 
 with map:
     st.header("Map Distribution")
