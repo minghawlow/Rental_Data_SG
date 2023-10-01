@@ -3,6 +3,7 @@
 Welcome to the Singapore Rental Market Insights project. This project aims to provide valuable insights into the rental property market in Singapore. Whether you're a newcomer to the city or a local resident looking to rent, these insights can help you make informed decisions.
 
 I have built a Tableau Data Story, feel free to explore [Tableau Data Story](https://public.tableau.com/views/RentalPropertyDashboard/DataStory?:language=en-US&:display_count=n&:origin=viz_share_link).
+
 *Note: The analysis presented in this Tableau data story is based on data collected during the months of August and September in 2023. Please keep in mind that rental market dynamics may vary over time, and the insights provided here are specific to the data period mentioned.*
 
 ## Project Overview
